@@ -1,6 +1,6 @@
 {
   "name": "voided-data",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Proper DS for TS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,9 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "keywords": ["Datastructures"],
+  "keywords": [
+    "Datastructures"
+  ],
   "author": "Voided Name",
   "license": "ISC",
   "files": [
