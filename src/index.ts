@@ -1,1 +1,1 @@
-export * from "./datastructures"
+export * from './datastructures';

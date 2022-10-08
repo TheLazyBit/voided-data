@@ -1,1 +1,1 @@
-export type Map<K, V> = any
+export type Map<K, V> = any;
