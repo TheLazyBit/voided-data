@@ -19,5 +19,9 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "semi": "error",
+        "no-trailing-spaces": "error",
+        "comma-dangle": "off",
+        "@typescript-eslint/comma-dangle": ["error", "always-multiline"]
     }
 }
