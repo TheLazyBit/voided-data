@@ -37,41 +37,26 @@ Maybe<T> = Some<T> | None<T>
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface,@typescript-eslint/no-unused-vars
 export interface Maybe<Just> {
-  map: <NewJust>(
-    m: (just: Just) => NewJust
-  ) => Maybe<NewJust>
+  map: <NewJust>(m: (just: Just) => NewJust) => Maybe<NewJust>;
 
-  match: <Some, None>(
-    onSome: (just: Just) => Some,
-    onNone: () => None,
-  ) => Some | None
+  match: <Some, None>(onSome: (just: Just) => Some, onNone: () => None) => Some | None;
 }
 interface Some<Just> extends Maybe<Just> {
-  just: Just
+  just: Just;
 
-  map: <NewJust>(
-    m: (just: Just) => NewJust
-  ) => Some<NewJust>
+  map: <NewJust>(m: (just: Just) => NewJust) => Some<NewJust>;
 
-  match: <Some, None>(
-    onSome: (just: Just) => Some,
-    onNone: () => None,
-  ) => Some
+  match: <Some, None>(onSome: (just: Just) => Some, onNone: () => None) => Some;
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface None<Just> extends Maybe<Just>{
-  map: <NewJust>(
-    m: (just: Just) => NewJust
-  ) => None<NewJust>
+interface None<Just> extends Maybe<Just> {
+  map: <NewJust>(m: (just: Just) => NewJust) => None<NewJust>;
 
-  match: <Some, None>(
-    onSome: (just: Just) => Some,
-    onNone: () => None,
-  ) => None
+  match: <Some, None>(onSome: (just: Just) => Some, onNone: () => None) => None;
 }
 
 export function isSome<Just>(maybe: Maybe<Just>): maybe is Some<Just> {
-  return "just" in maybe;
+  return 'just' in maybe;
 }
 
 export function isNone<Just>(maybe: Maybe<Just>): maybe is None<Just> {
