@@ -1,4 +1,4 @@
-import { isNone, isSome, Maybe, none, some } from '../../../src/mondas/maybe';
+import { isNone, isSome, Maybe, none, some } from '../../../src/monads/maybe';
 
 describe('identities', () => {
   it('should be some when some', () => {
