@@ -1,15 +1,12 @@
 // null, string, number, bigint, undefined, boolean
 
 type EqualableObject = {
-  [key: string]: Equalable
-}
-type HasNativeEquality = null | string | number | bigint | undefined | boolean
-export type Equalable = EqualableObject | HasNativeEquality | Equalable[]
+  [key: string]: Equalable;
+};
+type HasNativeEquality = null | string | number | bigint | undefined | boolean;
+export type Equalable = EqualableObject | HasNativeEquality | Equalable[];
 
-const equals = (
-  self: Equalable,
-  other: Equalable,
-): boolean => {
+const equals = (self: Equalable, other: Equalable): boolean => {
   if (self === null || other === null) return self === other;
   if (typeof self !== typeof other) return false;
 
@@ -34,9 +31,9 @@ const equals = (
     if (selfValues.length !== otherValues.length) return false;
     for (let i = 0; i < selfValues.length; i++) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const [,left] = selfValues[i]!;
+      const [, left] = selfValues[i]!;
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const [,right] = otherValues[i]!;
+      const [, right] = otherValues[i]!;
       if (!equals(left, right)) return false;
     }
     return true;
@@ -45,5 +42,3 @@ const equals = (
 };
 
 export default equals;
-
-
