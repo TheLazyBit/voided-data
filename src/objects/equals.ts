@@ -9,15 +9,15 @@ export type Equalable = EqualableObject | HasNativeEquality | Equalable[];
 const equals = (self: Equalable, other: Equalable): boolean => {
   if (self === null || other === null) return self === other;
   if (typeof self !== typeof other) return false;
+  if (Array.isArray(self) !== Array.isArray(other)) return false;
 
   if (Array.isArray(self)) {
-    if (!Array.isArray(other)) return false;
-    if (self.length !== other.length) return false;
+    if (self.length !== (other as Equalable[]).length) return false;
     for (let i = 0; i < self.length; i++) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const left = self[i]!;
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const right = other[i]!;
+      const right = (other as Equalable[])[i]!;
       if (!equals(left, right)) return false;
     }
     return true;

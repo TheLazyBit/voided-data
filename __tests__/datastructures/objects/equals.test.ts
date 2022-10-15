@@ -40,9 +40,10 @@ describe('equality checks', () => {
     [[1, 3, 2], [1, 2, 3]],
     [undefined, {}],
     [{}, []],
-    [{ some: 'value' }, { some: '<value>' }],
+    [{ some: 'value' }, { some: 'value a' }],
     [{ more: 'values', and: 7 }, { more: 'values', and: 15 }],
   ] as [Equalable, Equalable][])('should not be equal', ((l, r) => {
+    console.log(l, r, equals(l, r));
     expect(equals(l, r)).toBe(false);
     expect(equals(r, l)).toBe(false);
   }));
