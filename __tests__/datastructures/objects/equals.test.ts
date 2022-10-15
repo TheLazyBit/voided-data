@@ -32,7 +32,7 @@ describe('equality checks', () => {
   }));
 
   it.each([
-    ['', ''],
+    ['', '!'],
     ['some value', 'some ! value'],
     [0, 4],
     [53, 513],
@@ -43,8 +43,8 @@ describe('equality checks', () => {
     [{ some: 'value' }, { some: '<value>' }],
     [{ more: 'values', and: 7 }, { more: 'values', and: 15 }],
   ] as [Equalable, Equalable][])('should not be equal', ((l, r) => {
-    expect(equals(l, r)).toBe(true);
-    expect(equals(r, l)).toBe(true);
+    expect(equals(l, r)).toBe(false);
+    expect(equals(r, l)).toBe(false);
   }));
 
   it('should be equal on deep', () => {
