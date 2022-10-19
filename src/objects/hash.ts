@@ -1,7 +1,7 @@
 import { cyrb53 } from '../math/hash';
 
 type HashableObject = {
-  [key: string]: Hashable
+  [key: string]: Hashable;
 };
 type HasNativeHashablility = null | string | number | bigint | undefined | boolean;
 export type Hashable = HashableObject | HasNativeHashablility | Hashable[];
@@ -20,7 +20,7 @@ const hash = (hashable: Hashable, seed = 0): number => {
   const values = Object.entries(hashable);
   values.sort(([l], [r]) => l.localeCompare(r));
 
-  return values.reduce((agr: number, [,v]) => 17 * agr + hash(v, _hash(`${seed}`)), 17);
+  return values.reduce((agr: number, [, v]) => 17 * agr + hash(v, _hash(`${seed}`)), 17);
 };
 
 export default hash;
