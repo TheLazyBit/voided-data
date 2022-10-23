@@ -76,7 +76,6 @@ export function createHashTable<Key extends Hashable & Equalable, Value>(): VNMa
       const oldBuckets = buckets;
       buckets = new Array(capacity).fill(null).map(() => []);
       oldBuckets.forEach((bucket) => bucket.forEach(([k, v]) => _set(k, v)));
-      console.log('RSIZE', capacity, buckets);
     }
   };
 
