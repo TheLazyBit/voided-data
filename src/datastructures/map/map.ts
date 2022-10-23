@@ -34,7 +34,6 @@ export interface VNMap<Key extends Hashable & Equalable, Value> {
   toString(): string;
 }
 
-
 const MIN_LOAD = 0.25;
 const MAX_LOAD = 1;
 const EXPANSION_FACTOR = 2;
@@ -42,8 +41,8 @@ const CONTRACTION_FACTOR = 0.5;
 const MIN_CAPACITY = 32;
 
 export function createHashTable<Key extends Hashable & Equalable, Value>(): VNMap<Key, Value> {
-  type KeyValuePair = [Key, Value]
-  type Bucket = KeyValuePair[]
+  type KeyValuePair = [Key, Value];
+  type Bucket = KeyValuePair[];
   let size = 0;
   let capacity = MIN_CAPACITY;
   let buckets: Bucket[] = new Array(capacity).fill(null).map(() => []);
@@ -76,12 +75,8 @@ export function createHashTable<Key extends Hashable & Equalable, Value>(): VNMa
       capacity = newCapacity;
       const oldBuckets = buckets;
       buckets = new Array(capacity).fill(null).map(() => []);
-      oldBuckets.forEach(
-        (bucket) => bucket.forEach(
-          ([k, v]) => _set(k, v),
-        ),
-      );
-      console.log("RSIZE", capacity, buckets);
+      oldBuckets.forEach((bucket) => bucket.forEach(([k, v]) => _set(k, v)));
+      console.log('RSIZE', capacity, buckets);
     }
   };
 
@@ -115,12 +110,14 @@ export function createHashTable<Key extends Hashable & Equalable, Value>(): VNMa
       }
     },
     toString(): string {
-      return '{ '
-        + buckets
+      return (
+        '{ ' +
+        buckets
           .flatMap((bucket) => bucket)
           .map((pair) => JSON.stringify(pair))
-          .join(',')
-        + ' }';
+          .join(',') +
+        ' }'
+      );
     },
   };
 }
