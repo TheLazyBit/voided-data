@@ -36,6 +36,20 @@ Maybe<T> = Some<T> | None<T>
  */
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface,@typescript-eslint/no-unused-vars
+/**
+ * @startuml
+ * enum Maybe<T> <<(U, white)>> {
+ * }
+ *
+ * struct Some<T> {
+ * }
+ * struct None<T> {
+ * }
+ *
+ * Maybe <|-- Some
+ * Maybe <|-- None
+ * @enduml
+ */
 export interface Maybe<Just> {
   map: <NewJust>(m: (just: Just) => NewJust) => Maybe<NewJust>;
 
