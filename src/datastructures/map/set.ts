@@ -37,16 +37,16 @@ export function createHashSet<Key extends Equalable & Hashable>(): VNSet<Key> {
 
   const iter = () => map.iter().map(([k]) => k);
   const has = (key: Key): boolean => {
-    return map
-      .get(key)
-      .match(
-        () => true,
-        () => false,
-      );
+    return map.get(key).match(
+      () => true,
+      () => false,
+    );
   };
 
   return {
-    size(): number { return map.size(); },
+    size(): number {
+      return map.size();
+    },
     add(key: Key) {
       map.set(key, null);
     },
@@ -62,23 +62,23 @@ export function createHashSet<Key extends Equalable & Hashable>(): VNSet<Key> {
     iter,
     union(other: VNSet<Key>): VNSet<Key> {
       const set = createHashSet<Key>();
-      iter().forEach(k => set.add(k));
-      other.iter().forEach(k => set.add(k));
+      iter().forEach((k) => set.add(k));
+      other.iter().forEach((k) => set.add(k));
       return set;
     },
     intersection(other: VNSet<Key>): VNSet<Key> {
       const set = createHashSet<Key>();
-      iter().forEach(k => {
+      iter().forEach((k) => {
         if (other.has(k)) set.add(k);
       });
       return set;
     },
     disjunction(other: VNSet<Key>): VNSet<Key> {
       const set = createHashSet<Key>();
-      iter().forEach(k => {
+      iter().forEach((k) => {
         if (!other.has(k)) set.add(k);
       });
-      other.iter().forEach(k => {
+      other.iter().forEach((k) => {
         if (!has(k)) set.add(k);
       });
       return set;
