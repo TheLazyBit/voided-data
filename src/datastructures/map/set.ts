@@ -35,7 +35,7 @@ interface VNSet<Key extends Hashable & Equalable> {
 export function createHashSet<Key extends Equalable & Hashable>(): VNSet<Key> {
   const map = createHashTable<Key, null>();
 
-  const iter = () => map.iter().map(([k,v]) => k);
+  const iter = () => map.iter().map(([k]) => k);
   const has = (key: Key): boolean => {
     return map
       .get(key)
