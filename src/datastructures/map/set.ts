@@ -1,3 +1,7 @@
+import { Hashable } from '../../objects/hash';
+import { Equalable } from '../../objects/equals';
+import { createHashTable } from './map';
+
 /**
  * A Set:
  *  Is a lookup structure to determine if an entry already exists or not.
@@ -16,10 +20,6 @@
  * }
  * @enduml
  */
-import { Hashable } from '../../objects/hash';
-import { Equalable } from '../../objects/equals';
-import { createHashTable } from './map';
-
 interface VNSet<Key extends Hashable & Equalable> {
   size(): number;
   has(key: Key): boolean;
