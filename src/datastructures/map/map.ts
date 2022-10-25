@@ -27,6 +27,12 @@ export interface VNMap<Key extends Hashable & Equalable, Value> {
 
   set(key: Key, value: Value): void;
 
+  map<NewKey extends Hashable & Equalable, NewValue>(
+    mapper: (pair: [Key, Value]) => [NewKey, NewValue]
+  ): VNMap<NewKey, NewValue>;
+
+  iter(): [Key, Value][];
+
   unset(key: Key): void;
 
   size(): number;
@@ -46,6 +52,8 @@ export function createHashTable<Key extends Hashable & Equalable, Value>(): VNMa
   let size = 0;
   let capacity = MIN_CAPACITY;
   let buckets: Bucket[] = new Array(capacity).fill(null).map(() => []);
+
+  const iter = () => buckets.flatMap((bucket) => bucket.map(([k,v]) => [k,v] as KeyValuePair));
 
   const load = () => size / capacity;
 
@@ -87,6 +95,7 @@ export function createHashTable<Key extends Hashable & Equalable, Value>(): VNMa
         resize();
       }
     },
+    iter,
     get(key: Key): Maybe<Value> {
       const _hash = hash(key) % capacity;
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -108,11 +117,18 @@ export function createHashTable<Key extends Hashable & Equalable, Value>(): VNMa
         resize();
       }
     },
+    map<NewKey extends Hashable & Equalable, NewValue>(mapper: (pair: [Key, Value]) => [NewKey, NewValue]): VNMap<NewKey, NewValue> {
+      const newMap = createHashTable<NewKey, NewValue>();
+      iter().forEach((pair) => {
+        const [nk, nv] = mapper(pair);
+        newMap.set(nk, nv);
+      });
+      return newMap;
+    },
     toString(): string {
       return (
         '{ ' +
-        buckets
-          .flatMap((bucket) => bucket)
+        iter()
           .map((pair) => JSON.stringify(pair))
           .join(',') +
         ' }'
