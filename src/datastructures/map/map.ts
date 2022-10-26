@@ -24,19 +24,13 @@ import equals, { Equalable } from '../../objects/equals';
  */
 export interface VNMap<Key extends Hashable & Equalable, Value> {
   get(key: Key): Maybe<Value>;
-
   set(key: Key, value: Value): void;
-
   map<NewKey extends Hashable & Equalable, NewValue>(
     mapper: (pair: [Key, Value]) => [NewKey, NewValue],
   ): VNMap<NewKey, NewValue>;
-
   iter(): [Key, Value][];
-
   unset(key: Key): void;
-
   size(): number;
-
   toString(): string;
 }
 

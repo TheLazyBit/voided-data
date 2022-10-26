@@ -38,6 +38,9 @@ const equals = (self: Equalable, other: Equalable): boolean => {
     }
     return true;
   }
+
+  if (Number.isNaN(self) && Number.isNaN(other)) return true;
+
   return self === other;
 };
 

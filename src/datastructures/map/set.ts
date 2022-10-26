@@ -30,6 +30,8 @@ interface VNSet<Key extends Hashable & Equalable> {
   union(other: VNSet<Key>): VNSet<Key>;
   intersection(other: VNSet<Key>): VNSet<Key>;
   disjunction(other: VNSet<Key>): VNSet<Key>;
+  difference(other: VNSet<Key>): VNSet<Key>;
+  equals(other: VNSet<Key>): boolean;
 }
 
 export function createHashSet<Key extends Equalable & Hashable>(): VNSet<Key> {
@@ -82,6 +84,17 @@ export function createHashSet<Key extends Equalable & Hashable>(): VNSet<Key> {
         if (!has(k)) set.add(k);
       });
       return set;
+    },
+    difference(other: VNSet<Key>): VNSet<Key> {
+      const set = createHashSet<Key>();
+      iter().forEach((k) => {
+        if (!other.has(k)) set.add(k);
+      });
+      return set;
+    },
+    equals(other: VNSet<Key>): boolean {
+      if (other.size() !== map.size()) return false;
+      return iter().every((it) => other.has(it));
     },
   };
 }
