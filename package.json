@@ -1,6 +1,6 @@
 {
   "name": "voided-data",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Proper DS for TS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
